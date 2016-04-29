@@ -1,0 +1,53 @@
+{% extends 'secureblog/base.html' %}
+
+{% block content %}
+  <div class="post">
+    {% if post.published_date %}
+        <div class="date">
+            {{ post.published_date }}
+        </div>
+    {% endif %}
+    <h1>{{ post.title }}</h1>
+    <div class="row">
+      <div class="col-lg-10">
+        <p>{{ post.text|linebreaks }}</p>
+      </div>
+      <div class="col-lg-2">
+        {% if user.is_authenticated %}
+          <p style="text-align: right; margin-right: 40px;">
+            <a style="text-indent: 0;" class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if post.message_set.all %}
+    <h2>Comments</h2>
+    <div class="comments">
+      {% for comment in post.message_set.all %}
+        <div class="comment">
+          <span>
+              <a href="{% url 'post_detail' pk=post.pk %}">{{ comment.author }}</a> said on {{ comment.published_date }}
+          </span>
+          <p>
+              {{ comment.text }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+<br>
+
+  {% if user.is_authenticated %}
+    <h3>Add comment</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <br>
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+  {% endif %}
+{% endblock %}
