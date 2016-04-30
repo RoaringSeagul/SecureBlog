@@ -10,4 +10,4 @@ class PostForm(forms.ModelForm):
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        exclude = ['published_date', 'Post', 'create_date']
+        fields = ('author', 'text')

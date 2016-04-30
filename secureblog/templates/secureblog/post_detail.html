@@ -28,7 +28,7 @@
       {% for comment in post.message_set.all %}
         <div class="comment">
           <span>
-              <a href="{% url 'post_detail' pk=post.pk %}">{{ comment.author }}</a> said on {{ comment.published_date }}
+              <a href="{% url 'post_detail' pk=post.pk %}">{{ comment.author }}</a>
           </span>
           <p>
               {{ comment.text }}
