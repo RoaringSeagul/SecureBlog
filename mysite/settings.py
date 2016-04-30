@@ -69,6 +69,10 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'site-templates/'),
+)
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
@@ -121,3 +125,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+SECURE_BROWSER_XSS_FILTER = True
